@@ -6,8 +6,6 @@
 #define frameSize 256
 
 
-// Completed by Lillie Hunter
-
 // Structures
 typedef struct {
     unsigned char page;
@@ -39,17 +37,18 @@ void* initialize_TLB(){
 
 // Verifies if page number is in TLB
 
-int check_TLB(int* page){
+int check_TLB(int page){
 
     for(int index = 0; index < TLBtable.length; index++){
-        if (TLBtable.table[index].page == page && TLBtable.table[index].valid == 1){
-            return TLBtable.table[index].frame; // Returns frame (TLB Hit)
+
+        if (TLBtable.table[index].page == page &&
+            TLBtable.table[index].valid == 1){
+
+            return TLBtable.table[index].frame;
         }
-        
-        
     }
 
-    return -1; // TLB Miss
+    return -1;
 }
 
 void update_TLB(unsigned char page, unsigned char frame){
