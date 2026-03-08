@@ -8,28 +8,31 @@ int* page;
 int* offset;
 
 int main(int argc, char *argv[]){
-    
+
     if (argc < 2){
         fprintf(stderr,"SYNOPSIS: %s <file name>\n",argv[0]);
         return 1;
     }
 
-    logical_addresses = read_address(argv[1]);
-    
-    if (logical_addresses == NULL){
-        fprintf(stderr,"Address Unavailable. File %s is empty or unreadable.\n",argv[1]);
+    int *addresses = read_address(argv[1]);
+
+    if (addresses == NULL){
+        fprintf(stderr,"Address file could not be read.\n");
         return 2;
     }
 
-    find_page(logical_addresses);
-    find_offset(logical_addresses);
+    for(int i = 0; i < 1000; i++){
 
+        int logical = addresses[i];
 
+        int page = find_page(logical);
+        int offset = find_offset(logical);
 
-    /** check_TLB - If function yields 0, initialize page table, else initate translate() 
-     * and PhysicalStorage
-     */
-    
+        printf("Logical: %d Page: %d Offset: %d\n",
+               logical, page, offset);
+    }
+
+    free(addresses);
+
     return 0;
 }
-
