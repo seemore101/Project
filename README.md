@@ -1,10 +1,73 @@
-# Final Project: Designing a Virtual Memory Manager
+# Virtual Memory Manager Simulation
 
 This project consists of writing a program that translates logical to physical addresses for a virtual address space of size 2<sup>16</sup> 
  = 65,536 bytes. Your program will read from a file containing logical addresses and, using a TLB and a page table, will translate each logical address to its corresponding physical address and output the value of the byte stored at the translated physical address. Your learning goal is to use simulation to understand the steps involved in translating logical to physical addresses. This will include resolving page faults using demand paging, managing a TLB, and implementing a page-replacement algorithm.
 
+## About This Project
 
-## Description
+This project was completed as part of an Operating Systems course.
+
+The goal of the project is to simulate a virtual memory manager that
+translates logical addresses into physical addresses using a page table
+and a Translation Lookaside Buffer (TLB).
+
+The original assignment specification provided by the instructor is
+included below for reference.
+
+## My Implementation
+
+This program simulates the process of virtual memory address translation.
+
+Key features include:
+
+- Logical address parsing into page number and offset
+- TLB lookup for fast address translation
+- Page table lookup on TLB miss
+- Demand paging from a backing store
+- Physical memory simulation
+- Tracking TLB hit rate and page fault rate
+
+The program reads logical addresses from a file and translates them
+into physical addresses while retrieving the value stored in memory.
+
+## Project Structure
+
+virtual-memory-manager
+│
+├── main.c                # program entry point
+├── Input.c               # reads logical addresses
+├── TLB.c                 # TLB implementation
+├── PageTable.c           # page table logic
+├── PhysicalStorage.c     # simulated physical memory
+│
+├── addresses.txt         # input logical addresses
+├── BACKING_STORE.bin     # simulated backing store
+├── correct.txt           # expected output examples
+│
+└── README.md
+
+## Example Output
+
+Logical address, Physical address, Value
+
+16916, 20, 0
+62493, 285, 0
+30198, 758, 29
+
+## What I Learned
+
+Through this project I learned how operating systems manage memory
+using paging and address translation.
+
+Concepts explored include:
+
+- Virtual vs physical memory
+- Page tables
+- Translation Lookaside Buffers (TLB)
+- Demand paging
+- Handling page faults
+
+## Original Assignment Specification
 
 Your program will read a file containing several 32-bit integer numbers representing logical addresses. However, you only need to be concerned with 16-bit addresses, so you must mask the rightmost 16 bits of each logical address. These 16 bits are divided into (1) an 8-bit page number and (2) an 8-bit page offset. Hence, the addresses are structured as shown as:
 
