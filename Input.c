@@ -24,17 +24,15 @@ int* read_address(char* filename){
     return addresses;
 }
 
-int * find_page(int* address){
-    int pageNumber;
+int find_offset(int address){
 
-    // casts pointer to an integer
-    uintptr_t add = (uintptr_t)address;
+    int offset;
 
-    pageNumber = (add >> 8) & 0x00FF;
+    offset = address & 0xFF;
 
-    return pageNumber;
-    
+    return offset;
 }
+
 
 int * find_offset(int* address){
 
